@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Random Cat Pictures</title>
+  <script>
+    
+    function fetchRandomCat() {
+      
+      var apiUrl = 'https://api.thecatapi.com/v1/images/search';
+
+      
+      fetch(apiUrl)
+        .then(response => response.json()) 
+        .then(data => {
+          var catImage = data[0].url; 
+
+          
+          var imgElement = document.createElement('img');
+          imgElement.src = catImage;
+          imgElement.alt = 'Random Cat Picture';
+
+         
+          var container = document.getElementById('cat-container');
+          container.innerHTML = ''; 
+          container.appendChild(imgElement);
+        })
+        .catch(error => {
+          console.error('Erro ao buscar imagem de gatinho:', error);
+        });
+    }
+
+    
+    window.onload = function() {
+      fetchRandomCat(); 
+    };
+  </script>
+</head>
+<body>
+  <h1>Random Cat Pictures</h1>
+  <div id="cat-container"></div>
+</body>
+</html>
